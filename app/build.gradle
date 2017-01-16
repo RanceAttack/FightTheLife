@@ -1,0 +1,38 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "cn.somehui.fightthelife"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "alpha1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources true
+            buildConfigField 'boolean', 'DEVELOPER_MODE', 'false'
+            zipAlignEnabled true
+        }
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            buildConfigField 'boolean', 'DEVELOPER_MODE', 'true'
+            zipAlignEnabled false
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:multidex:1.0.1'
+
+    compile project(':publiclibrary')
+}

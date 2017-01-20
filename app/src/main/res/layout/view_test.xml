@@ -3,10 +3,12 @@
               android:orientation="vertical"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
-    <TextClock
-        android:background="@mipmap/ic_launcher"
+    <cn.somehui.fightthelife.TransferClock
+        android:background="#000000"
         android:id="@+id/timer"
-        android:layout_width="100dp"
-        android:layout_height="50dp"/>
+        android:layout_width="wrap_content"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

@@ -6,7 +6,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.widget.Toast;
 
-import java.net.MulticastSocket;
+import cn.somehui.baselibrary.PixelUtils;
 
 /**
  * Created by somehui on 17/1/11.
@@ -15,6 +15,13 @@ import java.net.MulticastSocket;
 public class MyApplication extends MultiDexApplication {
     public static MyApplication THIS;
     public static Toast mToast;
+
+    @Override
+    public void onCreate() {
+        THIS = this;
+        super.onCreate();
+        PixelUtils.init(this);
+    }
 
     @SuppressLint("ShowToast")
     public static Toast getToast(){

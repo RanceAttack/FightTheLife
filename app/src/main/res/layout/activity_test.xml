@@ -1,19 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_test"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cn.somehui.fightthelife.TestActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/myground"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#333333"
+              android:orientation="vertical">
 
-    <Button
-        android:layout_width="@dimen/test_startbtn"
-        android:layout_height="75dp"
-        android:id="@+id/test_start"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <cn.somehui.fightthelife.TransferClock
+            android:id="@+id/clock_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="87dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="73dp"
+            tools:text="07:42"
+            />
+
+        <TextView
+            android:id="@+id/clock_ampm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/clock_screen"
+            android:layout_marginTop="-2dp"
+            android:layout_toRightOf="@+id/clock_screen"
+            android:textColor="#ffffff"
+            android:textSize="17dp"
+            tools:text="AM"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/clock_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:maxLines="1"
+        android:textSize="17dp"
+        tools:text="Tue April 5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="45dp"
+        android:paddingTop="45dp">
+
+        <cn.somehui.fightthelife.BatteryView
+            android:id="@+id/batteryview"
+            android:layout_width="135dp"
+            android:layout_height="67dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#a0ffffff"
+                android:textSize="16.67dp"
+                android:maxLines="1"
+                tools:text="Chargin Time Remaining"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="16.67dp"
+                android:maxLines="1"
+                tools:text=" 1h13m "/>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/start_clock"
+        android:text="Show Clock"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+    <RelativeLayout
+        android:id="@+id/screen_adlayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:layout_weight="1">
+
+    </RelativeLayout>
+
+</LinearLayout>

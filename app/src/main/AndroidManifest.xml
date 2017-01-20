@@ -9,14 +9,16 @@
         android:name=".MyApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestActivity">
+        <activity android:name=".LifeActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <service android:name=".TestService"/>
+        <service android:name=".LifeService"/>
     </application>
 
 </manifest>

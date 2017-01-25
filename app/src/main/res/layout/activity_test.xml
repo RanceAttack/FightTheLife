@@ -78,10 +78,12 @@
             android:layout_width="150dp"
             android:layout_gravity="right"
             android:layout_height="60dp"/>
-        <Space
+        <TextView
+            android:id="@+id/missyou"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:text=" "
+            android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/start_clock"
             android:text="Show Clock"
@@ -91,6 +93,14 @@
             android:layout_gravity="right"
             android:layout_height="60dp"/>
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/packagerecy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/activity_test">
+
+    </android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>

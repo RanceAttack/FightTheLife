@@ -10,7 +10,7 @@ public abstract class OnCoolDownClickListener implements View.OnClickListener{
 
     private final int DURATION_MILLS;
 
-    private long lastClickTime = Long.MIN_VALUE;
+    private long lastClickTime = -70000000;
 
     public OnCoolDownClickListener() {
         this.DURATION_MILLS = 500;
@@ -31,7 +31,7 @@ public abstract class OnCoolDownClickListener implements View.OnClickListener{
     private long currentTime(){
         long nowTime = System.currentTimeMillis();
         if(lastClickTime>nowTime){//if user changing time at runtime
-            lastClickTime = Long.MIN_VALUE;
+            lastClickTime = -70000000;
         }
         return nowTime;
     }

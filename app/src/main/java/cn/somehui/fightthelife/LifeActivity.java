@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import cn.somehui.baselibrary.clicklistener.OnIntentClickListener;
 import cn.somehui.baselibrary.permission.SelfPermissionCallback;
 
 public class LifeActivity extends MyBaseActivity {
@@ -24,8 +25,7 @@ public class LifeActivity extends MyBaseActivity {
     private BatteryView mBatteryView;
     private ViewGroup mBgViewGroup;
     private TransferClock mClockView;
-    private View mAdd;
-    private View mCut;
+    private View mReaderBtn;
 
     private void checkStatusBar(){
         Rect rectangle = new Rect();
@@ -51,6 +51,15 @@ public class LifeActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        mReaderBtn = $View(R.id.duokan);
+        mReaderBtn.setOnClickListener(new OnIntentClickListener() {
+            @Override
+            public void onClickWithGlobalCD(View v) {
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.duokan.reader");
+                startActivity( launchIntent );
+
             }
         });
         mBatteryView = $View(R.id.batteryview);

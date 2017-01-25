@@ -11,7 +11,7 @@ public abstract class OnIntentClickListener implements View.OnClickListener{
 
     private static final int DURATION_MILLS = 500;
 
-    private static long lastClickTime = Long.MIN_VALUE;
+    private static long lastClickTime = -70000000;
 
     public OnIntentClickListener() {
     }
@@ -28,7 +28,7 @@ public abstract class OnIntentClickListener implements View.OnClickListener{
     private long currentTime(){
         long nowTime = System.currentTimeMillis();
         if(lastClickTime>nowTime){//if user changing time at runtime
-            lastClickTime = Long.MIN_VALUE;
+            lastClickTime = -70000000;
         }
         return nowTime;
     }

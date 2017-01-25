@@ -4,10 +4,12 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
     <cn.somehui.fightthelife.TransferClock
-        android:background="#000000"
         android:id="@+id/timer"
+        android:background="@drawable/header4"
         android:layout_width="wrap_content"
         android:textColor="#ffffff"
+        android:paddingLeft="18dp"
+        android:paddingBottom="7dp"
         android:gravity="center"
         android:layout_height="match_parent"/>
 

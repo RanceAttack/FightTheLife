@@ -16,19 +16,19 @@ public class DateUtils {
 
     public static int translateHour(Calendar calendar) {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hour == 22) {
+        if        (hour == 22) {
             return 1;
         } else if (hour == 23) {
             return 1;
-        } else if (hour == 0) {
+        } else if (hour ==  0) {
             return 2;
-        } else if (hour == 1) {
+        } else if (hour ==  1) {
             return 2;
-        } else if (hour == 2) {
-            return 4;
-        } else if (hour == 3) {
+        } else if (hour ==  2) {
+            return 2;
+        } else if (hour ==  3) {
             return 1;
-        } else if (hour == 4) {
+        } else if (hour ==  4) {
             return 1;
         }else {
             return 0;

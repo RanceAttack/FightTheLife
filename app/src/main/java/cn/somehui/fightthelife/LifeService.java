@@ -125,7 +125,7 @@ public class LifeService extends Service {
     protected void initView() {
         mWindowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         if (mView == null) {
-            int statusBarHeight = 24 * 3;
+            int statusBarHeight = (int)(24* getApplicationContext().getResources().getDisplayMetrics().density);
             if (statusBarHeight <= 0) {
                 statusBarHeight = WindowManager.LayoutParams.WRAP_CONTENT;
             }

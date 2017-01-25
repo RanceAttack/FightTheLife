@@ -5,10 +5,11 @@
               android:id="@+id/myground"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#333333"
+              android:background="@drawable/lockscreen0"
               android:orientation="vertical">
 
     <RelativeLayout
+        android:paddingTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -63,38 +64,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#a0ffffff"
-                android:textSize="16.67dp"
-                android:maxLines="1"
-                tools:text="Chargin Time Remaining"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:textSize="16.67dp"
-                android:maxLines="1"
-                tools:text=" 1h13m "/>
         </LinearLayout>
     </LinearLayout>
     <TextView
         android:id="@+id/start_clock"
         android:text="Show Clock"
+        android:textColor="#ffffff"
         android:gravity="center"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
+        android:layout_gravity="right"
         android:layout_height="60dp"/>
-
-    <RelativeLayout
-        android:id="@+id/screen_adlayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="20dp"
-        android:layout_weight="1">
-
-    </RelativeLayout>
 
 </LinearLayout>

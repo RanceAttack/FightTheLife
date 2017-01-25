@@ -1,26 +1,26 @@
 package cn.somehui.fightthelife;
 
 import android.annotation.TargetApi;
-import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.TypedArray;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ViewDebug;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -194,7 +194,7 @@ public class FightClock extends TextView {
         chooseFormat(false);
     }
 
-    private void createTime(String timeZone) {
+    protected void createTime(String timeZone) {
         if (timeZone != null) {
             mTime = Calendar.getInstance(TimeZone.getTimeZone(timeZone));
         } else {
@@ -597,13 +597,15 @@ public class FightClock extends TextView {
         }
     }
 
-    private void onTimeChanged() {
+
+
+    protected final void onTimeChanged() {
         mTime.setTimeInMillis(System.currentTimeMillis());
         setTimeText(mTime);
     }
 
     protected void setTimeText(Calendar time){
-        setText(DateFormat.format(mFormat, time));
+        CharSequence str = DateFormat.format(mFormat, time);
         setContentDescription(DateFormat.format(mDescFormat, time));
     }
 

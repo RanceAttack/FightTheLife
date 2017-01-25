@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".LifeActivity"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

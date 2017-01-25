@@ -1,5 +1,6 @@
 package cn.somehui.fightthelife;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,14 +10,22 @@ import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+import cn.somehui.baselibrary.permission.SelfPermissionCallback;
 
 public class LifeActivity extends MyBaseActivity {
     private View mStartBtn;
     private BatteryView mBatteryView;
+    private ViewGroup mBgViewGroup;
+    private TransferClock mClockView;
+    private View mAdd;
+    private View mCut;
 
     private void checkStatusBar(){
         Rect rectangle = new Rect();
@@ -34,17 +43,44 @@ public class LifeActivity extends MyBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        setContentView(R.layout.activity_test);
+        mBgViewGroup = $View(R.id.myground);
+        mBgViewGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mBatteryView = $View(R.id.batteryview);
+        mClockView = $View(R.id.clock_screen);
         mStartBtn = $View(R.id.start_clock);
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(THIS,LifeService.class);
-                startService(intent);
+                checkPermissionAndRun(new SelfPermissionCallback(Manifest.permission.SYSTEM_ALERT_WINDOW) {
+                    @Override
+                    protected void run() {
+                        Intent intent = new Intent(THIS,LifeService.class);
+                        startService(intent);
+                    }
+
+                    @Override
+                    protected void bust() {
+
+                    }
+                });
+
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        overridePendingTransition(0,0);
+        super.finish();
+        overridePendingTransition(0,0);
     }
 
     @Override
@@ -52,11 +88,9 @@ public class LifeActivity extends MyBaseActivity {
         Window window = getWindow();
         new WindowManager.LayoutParams();
         window.addFlags(
-                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
 //                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-                | WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
         super.onAttachedToWindow();
     }

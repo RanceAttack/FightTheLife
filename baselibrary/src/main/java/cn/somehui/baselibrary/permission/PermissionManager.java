@@ -24,6 +24,7 @@ public class PermissionManager {
     private List<SelfPermissionCallback> mPermissionCallbackList = new ArrayList<>();
     private Activity mActivity;
     private final int PERMISSION;
+    private static final int OVERLAY_PERMISSION = 15375;
 
     public int getRequestCode() {
         return PERMISSION;
@@ -52,26 +53,57 @@ public class PermissionManager {
             callback.run();
             return;
         }
+
+        if (Manifest.permission.SYSTEM_ALERT_WINDOW.equals(callback.getPermission())) {
+            if (!Settings.canDrawOverlays(mActivity)) {
+                mPermissionCallbackList.add(callback);
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + mActivity.getPackageName() ));
+                mActivity.startActivityForResult(intent, OVERLAY_PERMISSION);
+            }else{
+                callback.run();
+            }
+            return;
+        }
         int permissionState = mActivity.checkSelfPermission(callback.getPermission());
         if (permissionState != PackageManager.PERMISSION_GRANTED) {
-            if (Manifest.permission.SYSTEM_ALERT_WINDOW.equals(callback.getPermission())) {
-                if (!Settings.canDrawOverlays(mActivity)) {
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                            Uri.parse("package:" + mActivity.getPackageName() ));
-                    mActivity.startActivityForResult(intent, PERMISSION);
-                }
-            } else {
-                if (deniedPermission.contains(callback.getPermission()) && !mActivity.shouldShowRequestPermissionRationale(callback.getPermission())) {
-                    callback.bust();
-                    return;
-                }
-                mPermissionCallbackList.add(callback);
-                mActivity.requestPermissions(new String[]{callback.getPermission()},
-                        PERMISSION);
+
+
+            if (deniedPermission.contains(callback.getPermission()) && !mActivity.shouldShowRequestPermissionRationale(callback.getPermission())) {
+                callback.bust();
+                return;
             }
+            mPermissionCallbackList.add(callback);
+            mActivity.requestPermissions(new String[]{callback.getPermission()},
+                    PERMISSION);
 
         } else {
             callback.run();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public void handleResult(int requestCode, int resultCode, Intent intent){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(requestCode == OVERLAY_PERMISSION){
+                List<SelfPermissionCallback> toDel = new ArrayList<>();
+                for (SelfPermissionCallback per : mPermissionCallbackList) {
+                    String str = per.getPermission();
+                    if (Manifest.permission.SYSTEM_ALERT_WINDOW.equals(str)) {
+                        if (Settings.canDrawOverlays(mActivity)) {
+                            per.allow();
+                            //getPermission(per.getPermission());
+                        }else{
+                            per.deny();
+                        }
+                    }
+                    if (per.done()) {
+                        toDel.add(per);
+                    }
+                }
+                mPermissionCallbackList.removeAll(toDel);
+
+            }
         }
     }
 
